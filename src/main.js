@@ -4,7 +4,7 @@ import envConfig from './Config/env.config.js';
 import dbConnection from './DB/db.connection.js';
 import {globalErrorHandler} from './Middlewares/index.js';
 import * as controllers from './Modules/index.js'
-
+import crypto from 'node:crypto'
 const app = express();
 const port = envConfig.app.PORT;
 dbConnection()
@@ -28,3 +28,6 @@ app.listen(port, ()=>{
     console.log(`server is runing on port ${port}`);
     
 })
+
+
+console.log(crypto.randomBytes(32).toString('hex'));

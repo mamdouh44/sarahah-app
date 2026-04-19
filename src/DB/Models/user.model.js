@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { GENDER, STATUS, USER_ROLES } from "../../Utils/index.js";
+import { GENDER, STATUS, USER_ROLES } from "../../Common/index.js";
 
 
 const userSchema = new mongoose.Schema({
@@ -41,7 +41,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: Object.values(STATUS),
         default: STATUS.ACTIVE
-    }
+    },
+    phoneNumber: String
 },
 {
     toJSON: {getters: true},
