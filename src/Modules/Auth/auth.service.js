@@ -1,11 +1,12 @@
 import { User } from "../../DB/Models/index.js";
 import { compare, encrypt, hash } from "../../Common/index.js";
+import userRepository from "../../DB/Repositories/user.repository.js";
 
 
 export const registerService = async (body)=>{
     const {firstName, lastName, email, password, gender, phone} = body;
 
-    const checkEmailDuplication = await User.findOne({email}).select("email");
+    const checkEmailDuplication = await userRepository.findOneDocument({email},{email: 1});
 
     if(checkEmailDuplication){
         throw new Error("Email already exists", {cause: {status: 409}});
@@ -23,7 +24,7 @@ export const registerService = async (body)=>{
     if(phone){
         userObject.phoneNumber = encrypt(phone);
     }
-    return User.create(userObject);
+    return userRepository.createDocument(userObject);
 }
 
 
